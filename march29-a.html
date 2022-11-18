@@ -8,17 +8,34 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-      <script>(function(n,i,v,r,s,c,x,z){x=window.AwsRumClient={q:[],n:n,i:i,v:v,r:r,c:c};window[n]=function(c,p){x.q.push({c:c,p:p});};z=document.createElement('script');z.async=true;z.src=s;document.head.insertBefore(z,document.getElementsByTagName('script')[0]);})('cwr','1c23e329-6dfd-45fa-a99f-f238c6f80b5e','1.0.0','us-east-1','https://client.rum.us-east-1.amazonaws.com/1.0.2/cwr.js',{sessionSampleRate:1,guestRoleArn:"arn:aws:iam::074682590620:role/RUM-Monitor-us-east-1-074682590620-7198698223461-Unauth",identityPoolId:"us-east-1:be38e4ea-3001-4a00-abbd-ab649b1cf491",endpoint:"https://dataplane.rum.us-east-1.amazonaws.com",telemetries:["performance","errors","http"],allowCookies:true,enableXRay:false});</script>
+    <script>
+      (function(n,i,v,r,s,c,x,z){x=window.AwsRumClient={q:[],n:n,i:i,v:v,r:r,c:c};window[n]=function(c,p){x.q.push({c:c,p:p});};z=document.createElement('script');z.async=true;z.src=s;document.head.insertBefore(z,document.head.getElementsByTagName('script')[0]);})(
+        'cwr',
+        'da840dc9-c028-4fd8-ac42-1ee65e9a7eb9',
+        '1.0.0',
+        'us-east-1',
+        'https://client.rum.us-east-1.amazonaws.com/1.12.0/cwr.js',
+        {
+          sessionSampleRate: 1,
+          guestRoleArn: "arn:aws:iam::074682590620:role/RUM-Monitor-us-east-1-074682590620-8881309088661-Unauth",
+          identityPoolId: "us-east-1:8383cede-668c-4453-8215-3f06e9521d13",
+          endpoint: "https://dataplane.rum.us-east-1.amazonaws.com",
+          telemetries: ["performance","errors","http"],
+          allowCookies: true,
+          enableXRay: false
+        }
+      );
+    </script>
   </head>
   <body>
     <section class="page-header">
-      <a href="https://qiah.github.io/multi-page-app-test-us-east-1" class="btn">View on GitHub</a>
-      <a href="https://qiah.github.io/multi-page-app-test-us-east-1/index.html" class="btn">Index</a>
-      <a href="https://qiah.github.io/multi-page-app-test-us-east-1/march29-a.html" class="btn">March29-a</a>
-      <a href="https://qiah.github.io/multi-page-app-test-us-east-1/march29-b.html" class="btn">March29-b</a>
-      <button style="font-size: x-large;padding: 5px;" onclick="jsError1()">Generate Common JS Error</button>
-      <button style="font-size: x-large;padding: 5px;" onclick="jsError2()">Generate Page Specific JS Error</button>
-      <button style="font-size: x-large;padding: 5px;" onclick="httpError()">Generate HTTP Error</button>
+      <a href="https://adebayor123.github.io/MultiPageApp/" class="btn">View on GitHub</a>
+      <a href="https://adebayor123.github.io/MultiPageApp/index.html" class="btn">Index</a>
+      <a href="https://adebayor123.github.io/MultiPageApp/march29-a.html" class="btn">March29-a</a>
+      <a href="https://adebayor123.github.io/MultiPageApp/march29-b.html" class="btn">March29-b</a>
+      <button id="common-js-error" style="font-size: x-large;padding: 5px;" onclick="recordEventClick()">Record Click Event</button>
+      <button id="paged-js-error" style="font-size: x-large;padding: 5px;" onclick="listenToScrolls()">Listen to scrolls!</button>
+      <button id="http-error" style="font-size: x-large;padding: 5px;" onclick="httpError()">Generate HTTP Error</button>
     </section>
 
     <section class="main-content">
@@ -66,17 +83,30 @@ $ git checkout gh-pages
 
     </section>
 
-   <script>
-      function jsError1() {
-        throw "JS Error 1";
-      }
-      function jsError2() {
-        throw "March page error";
-      }
-      function httpError() {
-        fetch("https://ww.marchcerserse.com");
-      }
-    </script>
+  <script>
+		function recordEventClick() {
+			cwr('recordEvent', {
+        type: 'custom_click_event',
+        data: { timestamp: Date.now(), currLocation: window.location }
+      });
+		}
+    function listenToScrolls() {
+			window.addEventListener(
+        "scroll",
+        () => runOnScroll(element),
+        { passive: true }
+      );
+		}
+    function recordScrollEvent() {
+      cwr('recordEvent', {
+        type: 'custom_scroll_event',
+        data: { timestamp: Date.now(), currLocation: window.location }
+      });
+    }
+		function httpError() {
+			fetch("https://ww.nyksdfs.com");
+		}
+	</script>
 
   </body>
 </html>
