@@ -83,30 +83,30 @@ $ git checkout gh-pages
 
     </section>
 
-  <script>
-		function recordEventClick() {
-			cwr('recordEvent', {
-        type: 'custom_click_event',
-        data: { timestamp: Date.now(), currLocation: window.location }
-      });
-		}
-    function listenToScrolls() {
-			window.addEventListener(
-        "scroll",
-        () => runOnScroll(element),
-        { passive: true }
-      );
-		}
-    function recordScrollEvent() {
-      cwr('recordEvent', {
-        type: 'custom_scroll_event',
-        data: { timestamp: Date.now(), currLocation: window.location }
-      });
-    }
-		function httpError() {
-			fetch("https://ww.nyksdfs.com");
-		}
-	</script>
+    <script>
+      function recordEventClick() {
+        cwr('recordEvent', {
+          type: 'custom_click_event',
+          data: { timestamp: Date.now(), currLocation: window.location }
+        });
+      }
+      function listenToScrolls() {
+        window.addEventListener(
+          "scroll",
+          () => recordScrollEvent(),
+          { passive: true }
+        );
+      }
+      function recordScrollEvent() {
+        cwr('recordEvent', {
+          type: 'custom_scroll_event',
+          data: { timestamp: Date.now(), currLocation: window.location }
+        });
+      }
+      function httpError() {
+        fetch("https://ww.nyksdfs.com");
+      }
+    </script>
 
   </body>
 </html>

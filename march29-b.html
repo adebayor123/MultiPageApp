@@ -87,7 +87,7 @@
       function listenToScrolls() {
         window.addEventListener(
           "scroll",
-          () => runOnScroll(element),
+          () => recordScrollEvent(),
           { passive: true }
         );
       }
